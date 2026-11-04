@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanjana Art Studio Gallery</title>
+
+<style>
+:root {
+  --bg:#100f0d;
+  --panel:#1b1915;
+  --gold:#d9b45b;
+  --text:#fff;
+  --muted:#b9b1a1;
+}
+
+* {box-sizing:border-box}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+
+header {
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#171511;
+  padding:16px;
+  border-bottom:1px solid #51452d;
+}
+
+nav {
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+.logo {
+  font-size:25px;
+  font-weight:bold;
+  color:var(--gold);
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin:8px;
+}
+
+nav a:hover {color:var(--gold)}
+
+.hero {
+  text-align:center;
+  padding:75px 20px;
+  background:linear-gradient(135deg,#252017,#100f0d);
+}
+
+.hero h1 {
+  font-size:45px;
+  color:var(--gold);
+}
+
+.hero p {color:var(--muted)}
+
+.button {
+  display:inline-block;
+  padding:12px 22px;
+  background:var(--gold);
+  color:#17130a;
+  text-decoration:none;
+  border-radius:25px;
+  margin:10px;
+}
+
+section {
+  padding:45px 20px;
+  max-width:1150px;
+  margin:auto;
+}
+
+h2 {
+  color:var(--gold);
+  text-align:center;
+  font-size:32px;
+}
+
+.search {
+  display:block;
+  width:100%;
+  max-width:500px;
+  padding:14px;
+  margin:25px auto;
+  border-radius:25px;
+  border:1px solid var(--gold);
+  background:#201d17;
+  color:white;
+  font-size:16px;
+}
+
+.filters,.pagination {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:20px;
+}
+
+.filters button,.pagination button {
+  padding:10px 18px;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:white;
+  border-radius:25px;
+  cursor:pointer;
+}
+
+.filters button.active,.pagination button.active,
+.filters button:hover,.pagination button:hover {
+  background:var(--gold);
+  color:#17130a;
+}
+
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card {
+  background:var(--panel);
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #40372a;
+  transition:.3s;
+}
+
+.card:hover {
+  transform:translateY(-5px);
+  border-color:var(--gold);
+}
+
+.card img {
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  cursor:zoom-in;
+}
+
+.card h3 {
+  padding:0 12px;
+  color:var(--gold);
+}
+
+.card p {
+  padding:0 12px 12px;
+  color:var(--muted);
+}
+
+.hidden {display:none!important}
+
+footer {
+  text-align:center;
+  padding:30px;
+  background:#171511;
+  color:var(--muted);
+}
+
+#lightbox {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000e;
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+#lightbox img {
+  max-width:95%;
+  max-height:85vh;
+  object-fit:contain;
+}
+
+#lightbox button {
+  position:absolute;
+  top:20px;
+  right:25px;
+  font-size:30px;
+  color:white;
+  background:transparent;
+  border:0;
+  cursor:pointer;
+}
+
+@media(max-width:750px) {
+  .gallery {grid-template-columns:repeat(2,1fr)}
+  .hero h1 {font-size:35px}
+}
+
+@media(max-width:450px) {
+  .gallery {grid-template-columns:1fr}
+  .card img {height:250px}
+  nav {justify-content:center}
+}
+</style>
+</head>
+<div class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Welcome to Sanjana Art Studio</h1>
+      <p>Discover beautiful paintings, creative art and inspiration.</p>
+      <a href="#gallery" class="button">Explore Gallery</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="image.jpg" alt="Sanjana Art Studio">
+    </div>
+  </div>
+</div>
+
+<body>
+
+<header>
+<nav>
+  <div class="logo">Sanjana Art Studio</div>
+  <div>
+    <a href="#home">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+</header>
+
+<div class="hero" id="home">
+  <h1>Welcome to Sanjana Art Studio</h1>
+  <p>Discover beautiful paintings, creative art and inspiration.</p>
+  <a href="#gallery" class="button">Explore Gallery</a>
+</div>
+
+<section id="gallery">
+<h2>Sanjana Art Gallery</h2>
+
+<input class="search" id="search"
+placeholder="Search artwork..." type="search">
+
+<div class="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="nature">Nature</button>
+  <button data-filter="abstract">Abstract</button>
+  <button data-filter="painting">Painting</button>
+</div>
+
+<div class="gallery" id="galleryGrid">
+
+<!-- Artwork images are generated from this array below -->
+
+</div>
+
+<div class="pagination" id="pagination"></div>
+<p id="pageStatus" style="text-align:center;color:#b9b1a1"></p>
+</section>
+
+<section id="about">
+<h2>About Sanajana Art Studio</h2>
+<p style="text-align:center;color:#b9b1a1">
+Welcome to our creative art gallery. Explore beautiful
+artworks, paintings, nature and abstract designs.
+</p>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+<p style="text-align:center">
+<a class="button" href="https://instagram.com/">Instagram</a>
+<a class="button" href="mailto:hello@example.com">Email</a>
+<a class="button" href="https://facebook.com/">Facebook</a>
+<a class="button" href="https://web.whatsapp.com/">Whatsapp</a>
+
+</p>
+</section>
+
+<footer>
+<p>© 2026 Sanjana Art Studio | All Rights Reserved</p>
+</footer>
+
+<div id="lightbox" onclick="closeZoom()">
+<button aria-label="Close">×</button>
+<img id="zoomImage" alt="Artwork preview">
+</div>
+
+<script>
+
+// Add or replace artwork here.
+const artworks = [
+  {
+    title:"Golden Hour",
+    category:"nature",
+    image:"photo 1.jpg"
+  },
+  {
+    title:"Color in Motion",
+    category:"abstract",
+    image:"photo 2.jpg"
+  },
+  {
+    title:"Quiet Expression",
+    category:"painting",
+    image:"photo 3.jpg"
+  },
+  {
+    title:"Still Waters",
+    category:"nature",
+    image:"photo 4.jpg"
+  },
+  {
+    title:"Golden Rhythm",
+    category:"abstract",
+    image:"photo 5.jpg"
+  },
+  {
+    title:"Open Horizons",
+    category:"nature",
+    image:"photo 6.jpg"
+  },
+  {
+    title:"Painted Dreams",
+    category:"painting",
+    image:"photo 7.jpg"
+  },
+  {
+    title:"Blue Serenity",
+    category:"abstract",
+    image:"photo 8.jpg"
+  },
+  {
+    title:"Floral Whispers",
+    category:"nature",
+    image:"photo 9.jpg"
+  }
+];
+
+const gallery = document.getElementById("galleryGrid");
+const pagination = document.getElementById("pagination");
+const search = document.getElementById("search");
+const pageStatus = document.getElementById("pageStatus");
+
+let currentPage = 1;
+let filter = "all";
+const pageSize = 6;
+
+function render() {
+  const term = search.value.toLowerCase();
+
+  const filtered = artworks.filter(item =>
+    (filter === "all" || item.category === filter) &&
+    item.title.toLowerCase().includes(term)
+  );
+
+  const pageCount = Math.max(10,Math.ceil(filtered.length/pageSize));
+  currentPage = Math.min(currentPage,pageCount);
+
+  const start = (currentPage-1)*pageSize;
+  const visible = filtered.slice(start,start+pageSize);
+
+  gallery.innerHTML = "";
+
+  if(visible.length === 0) {
+    gallery.innerHTML = "<p>No artwork found.</p>";
+  }
+
+  visible.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.title;
+    img.loading = "lazy";
+    img.onclick = () => openZoom(item.image);
+
+    const heading = document.createElement("h3");
+    heading.textContent = item.title;
+
+    const description = document.createElement("p");
+    description.textContent = item.category;
+
+    card.append(img,heading,description);
+    gallery.appendChild(card);
+  });
+
+  pagination.innerHTML = "";
+
+  for(let i=1;i<=pageCount;i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.className = i===currentPage ? "active":"";
+    btn.onclick = () => {
+      currentPage=i;
+      render();
+      document.getElementById("gallery").scrollIntoView();
+    };
+    pagination.appendChild(btn);
+  }
+
+  pageStatus.textContent =
+    `Page ${currentPage} of ${pageCount} | ${filtered.length} artworks`;
+}
+
+document.querySelectorAll(".filters button").forEach(btn => {
+  btn.onclick = () => {
+    filter=btn.dataset.filter;
+    currentPage=1;
+
+    document.querySelectorAll(".filters button")
+      .forEach(b=>b.classList.remove("active"));
+
+    btn.classList.add("active");
+    render();
+  };
+});
+
+search.addEventListener("input",()=>{
+  currentPage=1;
+  render();
+});
+
+function openZoom(src) {
+  document.getElementById("zoomImage").src=src;
+  document.getElementById("lightbox").style.display="flex";
+}
+
+function closeZoom() {
+  document.getElementById("lightbox").style.display="none";
+}
+
+render();
+
+</script>
+</body>
+</html>
